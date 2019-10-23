@@ -23,11 +23,11 @@ gitflow, github flow, gitlab flow
 mocha, supertest, puppeteer, selenium
 
 
-變數命名:駝峰式\n
-自動編排:Prettier\n
-Chai:assert\n
-框架:express\n
-資料庫:MongoDB\n
+變數命名:駝峰式
+自動編排:Prettier
+Chai:assert
+框架:express
+資料庫:MongoDB
 通訊方式:
 
 
