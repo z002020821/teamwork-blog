@@ -28,6 +28,6 @@ mocha, supertest, puppeteer, selenium
 Chai:assert
 框架:express
 資料庫:MongoDB
-通訊方式:
+通訊方式:WebSocket
 ```
 
