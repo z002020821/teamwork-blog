@@ -19,4 +19,4 @@ gitflow, github flow, gitlab flow
 
 4.測試方式 
 
-mocha, supertest, puppeteer
+mocha, supertest, puppeteer, selenium
