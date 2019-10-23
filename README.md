@@ -1,6 +1,6 @@
 # teamwork-blog
 
-1.專案成員
+## 1.專案成員
 ```
 張皓評
 陳羿勳
@@ -9,19 +9,19 @@
 林家齊
 陳佳妮
 ```
-2.專案名稱與描述
-
+## 2.專案名稱與描述
+```
 網誌系統
 https://github.com/se108aG/teamwork-blog
-
-3.合作模式
-
+```
+## 3.合作模式
+```
 gitflow, github flow, gitlab flow
-
-4.測試方式 
-
+```
+## 4.測試方式 
+```
 mocha, supertest, puppeteer, selenium
-
+```
 ```
 變數命名:駝峰式
 自動編排:Prettier
