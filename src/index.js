@@ -13,13 +13,13 @@ var sio = io(server)
 sio.on('connection', function (socket) {
   console.log('Client connected.')
 
-  socket.on('chStats', function (data) {
-      console.log(data.stats)
+  socket.on('login', function (data) {
+      console.log("account: " + data.acnt + ", password: " + data.pwd)
   })
 
-  socket.on('input', function (data) {
-    console.log(data.input)
-  })
+  socket.on('regist', function (data) {
+    console.log("account: " + data.acnt + ", password: " + data.pwd)
+})
 
   socket.on('disconnect', function () {
     console.log('Client disconnected.')
