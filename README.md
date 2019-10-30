@@ -16,11 +16,11 @@ https://github.com/se108aG/teamwork-blog
 ```
 ## 3.合作模式
 ```
-gitflow, github flow, gitlab flow
+github flow
 ```
 ## 4.測試方式 
 ```
-mocha, supertest, puppeteer, selenium
+mocha, puppeteer
 ```
 ## 5.程式格式
 ```
