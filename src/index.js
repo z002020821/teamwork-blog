@@ -17,6 +17,10 @@ sio.on('connection', function (socket) {
       console.log(data.stats)
   })
 
+  socket.on('input', function (data) {
+    console.log(data.input)
+  })
+
   socket.on('disconnect', function () {
     console.log('Client disconnected.')
   })
