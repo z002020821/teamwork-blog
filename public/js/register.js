@@ -9,3 +9,11 @@ $('#regist').click(function () {
         'pwd': pwd
     })
 })
+
+socket.on('created', function () {
+    window.location.replace("../success.html")
+})
+
+socket.on('failed', function () {
+    window.location.replace("../fail.html")
+})

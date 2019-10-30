@@ -15,10 +15,19 @@ sio.on('connection', function (socket) {
 
   socket.on('login', function (data) {
       console.log("account: " + data.acnt + ", password: " + data.pwd)
+
+      if (data.acnt == "111" && data.pwd == "222")
+        socket.emit('page1')
+      else
+        socket.emit('page2')
   })
 
   socket.on('regist', function (data) {
     console.log("account: " + data.acnt + ", password: " + data.pwd)
+    if (data.acnt == "111" && data.pwd == "222")
+      socket.emit('created')
+    else
+      socket.emit('failed')
 })
 
   socket.on('disconnect', function () {
