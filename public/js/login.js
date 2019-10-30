@@ -9,3 +9,11 @@ $('#login').click(function () {
         'pwd': pwd
     })
 })
+
+socket.on('page1', function () {
+    window.location.replace("../userPage.html")
+})
+
+socket.on('page2', function () {
+    window.location.replace("../error.html")
+})
