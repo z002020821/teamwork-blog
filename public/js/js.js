@@ -6,6 +6,11 @@ $('.press').mousedown(function () {
     socket.emit('chStats', {
         'stats': stats
     })
+    if ($(this).attr('id') == '1') {
+        socket.emit('input', {
+            'input': $('#text').val()
+        })
+    }
 })
 
 $('.press').mouseup(function () {
