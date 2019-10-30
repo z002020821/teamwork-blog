@@ -7,17 +7,23 @@
         <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
-        <p>
-            <a href="./login.html"><input type="button" value="Log in" id="1"></a>
-        </p>
-        <p>
-            <a href="./register.html"><input type="button" value="Register" id="2"></a>
-        </p>
+        <form>
+            <p>
+                Account: <input type="text" id="acnt">
+            </p>
+            <p>
+                Password: <input type="password" id="pwd">
+            </p>
+            <p>
+                <input type="button" value="Log in" id="login" class="press">
+            </p>
+            
+        </form>
 
         <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script>
-        <script src="js/index.js"></script>
+        <script src="js/login.js"></script>
     </body>
 </html>
