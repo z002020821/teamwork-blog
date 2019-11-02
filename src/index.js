@@ -36,16 +36,16 @@ sio.on('connection', function (socket) {
                 if (recAcnt == userAcnt) {
                   if (recPwd == userPwd) {
                     console.log(userAcnt + " log in")
-                    socket.emit('page1')
+                    socket.emit('userPage')
                   } else {
                     console.log(userAcnt + " incorrect pwd")
-                    socket.emit('page2')
+                    socket.emit('error')
                   }
                   return false
                 }
             } else {
                 console.log("finished query")
-                socket.emit('page2')
+                socket.emit('error')
                 client.close()
             }
         })
