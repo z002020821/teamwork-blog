@@ -11,9 +11,9 @@ $('#login').click(function () {
 })
 
 socket.on('page1', function () {
-    window.location.replace("../html/stats/userPage.html")
+    window.location.replace("../html/login/userPage.html")
 })
 
 socket.on('page2', function () {
-    window.location.replace("../html/stats/error.html")
+    window.location.replace("../html/login/error.html")
 })
