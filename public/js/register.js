@@ -11,9 +11,9 @@ $('#regist').click(function () {
 })
 
 socket.on('created', function () {
-    window.location.replace("../html/register/success.html")
+    window.location.replace("./success.html")
 })
 
 socket.on('failed', function () {
-    window.location.replace("../html/register/fail.html")
+    window.location.replace("./fail.html")
 })
