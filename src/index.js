@@ -62,19 +62,28 @@ sio.on('connection', function (socket) {
 
       const db = client.db("password");
 
-      if (recAcnt && recPwd) {
-        console.log("account created")
-        db.collection('users').insertOne({
-          "account": recAcnt,
-          "password": recPwd
-        })
-        socket.emit('created')
-      } else {
-        console.log("creat account failed")
-        socket.emit('failed')
-      }
-      
-      client.close()
+      var cursor = db.collection('users').find({}).project({_id: 0});
+
+      var count = 0
+      cursor.each(function(err, doc) {
+          if(doc) {
+            var userAcnt = doc.account
+
+            if (recAcnt == userAcnt) {
+              socket.emit('failed')
+              client.close()
+              return false
+            }
+          } else {
+            db.collection('users').insertOne({
+              "account": recAcnt,
+              "password": recPwd
+            })
+            socket.emit('created')
+            console.log("finished query")
+            client.close()
+           }
+       })
     })
   })
 
