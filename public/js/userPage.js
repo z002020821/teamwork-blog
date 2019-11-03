@@ -1,19 +1,20 @@
 var socket = io()
+var session_id
 
-$('#regist').click(function () {
-    var acnt = $('#acnt').val()
-    var pwd = $('#pwd').val()
-    
-    socket.emit('regist', {
-        'acnt': acnt,
-        'pwd': pwd
+let data = sessionStorage.getItem('sessionId')
+
+if (data == null) {
+    session_id = null
+    socket.emit('getId', {
+        sessionId: session_id
     })
-})
+} else {
+    session_id = data
+    socket.emit('getId', {
+        sessionId: session_id
+    })
+}
 
-socket.on('created', function () {
-    window.location.replace("./success.html")
-})
-
-socket.on('failed', function () {
-    window.location.replace("./fail.html")
+socket.on("idConfirm", function(data) {
+    sessionStorage.setItem('sessionId', data.sessionId)
 })
