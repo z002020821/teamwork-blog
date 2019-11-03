@@ -10,10 +10,10 @@ $('#login').click(function () {
     })
 })
 
-socket.on('page1', function () {
-    window.location.replace("../userPage.html")
+socket.on('userPage', function () {
+    window.location.replace("../userpage/userPage.html")
 })
 
-socket.on('page2', function () {
-    window.location.replace("../error.html")
+socket.on('error', function () {
+    window.location.replace("./error.html")
 })
