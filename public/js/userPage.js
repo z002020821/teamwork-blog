@@ -1,5 +1,6 @@
 var socket = io()
 var session_id
+var userAcnt
 
 let data = sessionStorage.getItem('sessionId')
 
@@ -15,6 +16,14 @@ if (data == null) {
     })
 }
 
-socket.on("idConfirm", function(data) {
+socket.on('idConfirm', function(data) {
     sessionStorage.setItem('sessionId', data.sessionId)
+    socket.emit('getAcnt', {
+        sessionId: session_id
+    })
+})
+
+socket.on('accountConfirm', function(data) {
+    userAcnt = data.account
+    console.log(userAcnt)
 })

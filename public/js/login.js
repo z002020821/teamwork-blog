@@ -14,8 +14,9 @@ if (data == null) {
     })
 }
 
-socket.on("idConfirm", function(data) {
+socket.on('idConfirm', function(data) {
     sessionStorage.setItem('sessionId', data.sessionId)
+    session_id = data.sessionId
 })
 
 $('#login').click(function () {
@@ -29,7 +30,7 @@ $('#login').click(function () {
     })
 })
 
-socket.on('userPage', function (data) {
+socket.on('userPage', function () {
     window.location.replace("../userpage/userPage.html")
 })
 
