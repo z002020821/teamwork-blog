@@ -1,0 +1,27 @@
+body{
+    margin-top: 10%;
+    background-color:darkslategray;
+    text-align: center;
+}
+
+h1{
+    font-size: 40px;
+    margin-bottom: 75px;
+    color: white;
+}
+
+p{
+    font-size: 25px;
+    color: white;
+}
+
+input[type="text"],input[type="password"]{
+    width: 250px;
+    height: 60px;
+}
+
+input[type="button"]{
+    margin: 30px;
+    width: 120px;
+    height: 50px;
+}
