@@ -31,7 +31,7 @@ $('#login').click(function () {
 })
 
 socket.on('userPage', function () {
-    window.location.replace("../userpage/userPage.html")
+    window.location.replace("../userpage/home.html")
 })
 
 socket.on('err', function () {
