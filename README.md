@@ -20,7 +20,7 @@ github flow
 ```
 ## 4.測試方式 
 ```
-mocha, puppeteer
+mocha, supertest
 ```
 ## 5.程式格式
 ```
