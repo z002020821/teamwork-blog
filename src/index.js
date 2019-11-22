@@ -143,6 +143,44 @@ sio.on('connection', function (socket) {
     })
   })
 
+  socket.on('po', function (data) {
+    var rectitle = data.title
+    var reccontent = data.content
+    var recpublisher = data.publisher
+
+    if(rectitle != null){
+      MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
+        assert.equal(null, err)
+      
+        const db = client.db("post")
+        
+        var cursor = db.collection('userpost').find({}).project({_id: 0})
+        
+        cursor.each(function(err, doc) {
+          if(doc) {
+            var title = doc.title
+  
+            if(rectitle == title) {
+              socket.emit('failed')
+              client.close()
+            }
+          } else {
+            db.collection('userpost').insertOne({
+              "title": rectitle,
+              "content": reccontent,
+              "publisher": recpublisher
+            })
+            socket.emit('created')
+            client.close()
+          }
+        })
+      })
+    } else {
+      socket.emit('failed')
+    }
+    
+  })
+
   socket.on('disconnect', function () {
     console.log('Client disconnected.')
   })
