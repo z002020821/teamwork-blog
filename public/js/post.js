@@ -28,13 +28,21 @@ socket.on('accountConfirm', function(data) {
     console.log(userAcnt)
 })
 
-$('#post').click(function () {
+$('#po').click(function () {
     var title = $('#title').val()
     var content = $('#content').val()
     
-    socket.emit('post', {
+    socket.emit('po', {
         'title' : title,
         'content' : content,
         'publisher' : userAcnt
     })
+})
+
+socket.on('created', function () {
+    window.location.replace("./home.html")
+})
+
+socket.on('failed', function () {
+    window.location.replace("./fail.html")
 })

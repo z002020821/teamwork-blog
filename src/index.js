@@ -144,9 +144,9 @@ sio.on('connection', function (socket) {
   })
 
   socket.on('po', function (data) {
-    var rectitle = data.title
-    var reccontent = data.content
-    var recpublisher = data.publisher
+    var recTitle = data.title
+    var recContent = data.content
+    var recPublisher = data.publisher
 
     if(rectitle != null){
       MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
@@ -160,15 +160,15 @@ sio.on('connection', function (socket) {
           if(doc) {
             var title = doc.title
   
-            if(rectitle == title) {
+            if(recTitle == title) {
               socket.emit('failed')
               client.close()
             }
           } else {
             db.collection('userpost').insertOne({
-              "title": rectitle,
-              "content": reccontent,
-              "publisher": recpublisher
+              "title": recTitle,
+              "content": recContent,
+              "publisher": recPublisher
             })
             socket.emit('created')
             client.close()
@@ -178,7 +178,6 @@ sio.on('connection', function (socket) {
     } else {
       socket.emit('failed')
     }
-    
   })
 
   socket.on('disconnect', function () {
