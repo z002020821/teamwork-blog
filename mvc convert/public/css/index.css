@@ -1,0 +1,19 @@
+body{
+    margin-top: 10%;
+    background-color:darkslategray;
+    text-align: center;
+}
+
+h1{
+    font-size: 40px;
+    margin-bottom: 75px;
+    color: white;
+}
+
+input{
+    color: white;
+    background-color: limegreen;
+    font-size: 30px;
+    width: 15%;
+    height: 120px;
+}
