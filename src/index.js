@@ -1,6 +1,7 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-const uri = "mongodb+srv://user:123@fangrolf-ielcr.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const MongoClient = require('mongodb').MongoClient
+const assert = require('assert')
+const uri =
+  'mongodb+srv://user:123@fangrolf-ielcr.gcp.mongodb.net/test?retryWrites=true&w=majority'
 const uuidv4 = require('uuid/v4')
 
 var express = require('express')
@@ -14,58 +15,69 @@ server.listen(8080, function () {
   console.log('Server running at port 8080.')
 })
 
-MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
-  assert.equal(null, err)
+MongoClient.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  function (err, client) {
+    assert.equal(null, err)
 
-  const db = client.db("loginUsers")
+    const db = client.db('loginUsers')
 
-  db.collection('users').drop()
-  client.close()
-})
+    db.collection('users').drop()
+    client.close()
+  }
+)
 
 sio.on('connection', function (socket) {
-  console.log("client connected")
+  console.log('client connected')
 
   socket.on('getId', function (data) {
     if (data.sessionId == null) {
       var session_id = uuidv4()
       socket.room = session_id
-      socket.join(socket.room, function(res) {
+      socket.join(socket.room, function (res) {
         socket.emit('idConfirm', {
-            sessionId: session_id
+          sessionId: session_id
         })
       })
     } else {
       socket.room = data.sessionId
-      socket.join(socket.room, function(res) {
+      socket.join(socket.room, function (res) {
         socket.emit('idConfirm', {
-            sessionId: data.sessionId
+          sessionId: data.sessionId
         })
       })
     }
   })
 
   socket.on('getAcnt', function (data) {
-    MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
-      assert.equal(null, err)
+    MongoClient.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      function (err, client) {
+        assert.equal(null, err)
 
-      const db = client.db("loginUsers")
+        const db = client.db('loginUsers')
 
-      var cursor = db.collection('users').find({}).project({_id: 0})
+        var cursor = db
+          .collection('users')
+          .find({})
+          .project({ _id: 0 })
 
-      cursor.each(function (err, doc) {
-        if (doc) {
-          if (data.sessionId == doc.uuid) {
-            var userAcnt = doc.account
-            socket.emit('accountConfirm', {
-              'account': userAcnt
-            })
+        cursor.each(function (err, doc) {
+          if (doc) {
+            if (data.sessionId == doc.uuid) {
+              var userAcnt = doc.account
+              socket.emit('accountConfirm', {
+                account: userAcnt
+              })
+            }
+          } else {
+            client.close()
           }
-        } else {
-          client.close()
-        }
-      })
-    })
+        })
+      }
+    )
   })
 
   socket.on('login', function (data) {
@@ -73,74 +85,96 @@ sio.on('connection', function (socket) {
     var recAcnt = data.acnt
     var recPwd = data.pwd
 
-    MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
-      assert.equal(null, err)
+    MongoClient.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      function (err, client) {
+        assert.equal(null, err)
 
-      const db = client.db("password")
+        const db = client.db('password')
 
-      var cursor = db.collection('users').find({}).project({_id: 0})
+        var cursor = db
+          .collection('users')
+          .find({})
+          .project({ _id: 0 })
 
-      cursor.each(function(err, doc) {
-          if(doc) {
-              var userAcnt = doc.account
-              var userPwd = doc.password
+        cursor.each(function (err, doc) {
+          if (doc) {
+            var userAcnt = doc.account
+            var userPwd = doc.password
 
-              if (recAcnt == userAcnt) {
-                if (recPwd == userPwd) {
-
-                  MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
+            if (recAcnt == userAcnt) {
+              if (recPwd == userPwd) {
+                MongoClient.connect(
+                  uri,
+                  { useNewUrlParser: true, useUnifiedTopology: true },
+                  function (err, client) {
                     assert.equal(null, err)
 
-                    const db = client.db("loginUsers")
+                    const db = client.db('loginUsers')
                     db.collection('users').insertOne({
-                      "account": userAcnt,
-                      "uuid": uuid
+                      account: userAcnt,
+                      uuid: uuid
                     })
                     client.close()
-                  })
+                  }
+                )
 
-                  socket.emit('userPage')
-                } else {
-                  socket.emit('err')
-                }
+                socket.emit('userPage')
+              } else {
+                socket.emit('err')
               }
+            }
           } else {
             socket.emit('err')
             client.close()
           }
-      })
-    })
+        })
+      }
+    )
   })
 
   socket.on('regist', function (data) {
     var recAcnt = data.acnt
     var recPwd = data.pwd
 
-    MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, client) {
-      assert.equal(null, err)
+    MongoClient.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      function (err, client) {
+        assert.equal(null, err)
 
-      const db = client.db("password")
+        const db = client.db('password')
 
-      var cursor = db.collection('users').find({}).project({_id: 0})
+        var cursor = db
+          .collection('users')
+          .find({})
+          .project({ _id: 0 })
 
-      cursor.each(function(err, doc) {
-          if(doc) {
+        cursor.each(function (err, doc) {
+          if (doc) {
             var userAcnt = doc.account
 
-            if (recAcnt == userAcnt) {
+            if (recAcnt == userAcnt || recAcnt == '') {
               socket.emit('failed')
               client.close()
             }
           } else {
-            db.collection('users').insertOne({
-              "account": recAcnt,
-              "password": recPwd
-            })
-            socket.emit('created')
-            client.close()
-           }
-       })
-    })
+            if (recPwd == '') {
+              socket.emit('failed')
+              client.close()
+            } else {
+              db.collection('users').insertOne({
+                account: recAcnt,
+                password: recPwd
+              })
+              socket.emit('created')
+              client.close()
+            }
+          }
+        })
+      }
+    )
   })
 
   socket.on('po', function (data) {
