@@ -65,6 +65,67 @@ async function Controller(srv) {
             })
           })
         })
+        
+        socket.on('regist', function (data) {
+          var recAcnt = data.acnt
+          var recPwd = data.pwd
+
+          var modelCursor = model.getCursor('password', 'users')
+          modelCursor.then(function (cursor) {
+            cursor.each(function (err, doc) {
+              if (doc) {
+                var userAcnt = doc.account
+                var userPwd = doc.password
+
+                if (recAcnt == userAcnt) {
+                  socket.emit('switchPage', {
+                    'page':'fail'
+                  })
+                } else {
+                  var insertData = JSON.stringify({
+                    account: recAcnt, 
+                    password: recPwd
+                  })
+                  model.regist('password', 'users', insertData)
+                  socket.emit('switchPage', {
+                    'page':'create'
+                  })
+                }
+              }
+            })
+          })
+        })
+
+        socket.on('po', function (data) {
+          var recTitle = data.title
+          var recContent = data.content
+          var recPublisher = data.publisher
+
+          var modelCursor = model.getCursor('post', 'userpost')
+          modelCursor.then(function (cursor) {
+            cursor.each(function (err, doc) {
+              if (doc) {
+                var title = doc.title
+
+                if (recTitle == title) {
+                  socket.emit('switchPage', {
+                    'page':'fail'
+                  })
+                } else {
+                  var insertData = JSON.stringify({
+                    title: recTitle, 
+                    content: recContent,
+                    publisher: recPublisher
+                  })
+                  model.po('post', 'userpost', insertData)
+                  socket.emit('switchPage', {
+                    'page':'create'
+                  })
+                }
+              }
+            })
+          })
+        })
 
         socket.on('disconnect', function () {
             console.log('Client disconnected.')
