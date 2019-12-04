@@ -39,10 +39,10 @@ $('#po').click(function () {
     })
 })
 
-socket.on('created', function () {
-    window.location.replace("./home.html")
-})
-
-socket.on('failed', function () {
-    window.location.replace("./fail.html")
+socket.on('switchPage', function (data) {
+    if (data.page == 'postCreate') {
+        window.location.replace("../userpage/home.html")
+    } else if (data.page == 'postFail') {
+        window.location.replace("./error.html")
+    }
 })

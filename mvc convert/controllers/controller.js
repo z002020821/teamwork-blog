@@ -79,7 +79,7 @@ async function Controller(srv) {
 
                 if (recAcnt == userAcnt) {
                   socket.emit('switchPage', {
-                    'page':'fail'
+                    'page':'registFail'
                   })
                 } else {
                   var insertData = JSON.stringify({
@@ -88,7 +88,7 @@ async function Controller(srv) {
                   })
                   model.regist('password', 'users', insertData)
                   socket.emit('switchPage', {
-                    'page':'create'
+                    'page':'registSucess'
                   })
                 }
               }
@@ -109,7 +109,7 @@ async function Controller(srv) {
 
                 if (recTitle == title) {
                   socket.emit('switchPage', {
-                    'page':'fail'
+                    'page':'postFail'
                   })
                 } else {
                   var insertData = JSON.stringify({
@@ -119,7 +119,7 @@ async function Controller(srv) {
                   })
                   model.po('post', 'userpost', insertData)
                   socket.emit('switchPage', {
-                    'page':'create'
+                    'page':'postCreate'
                   })
                 }
               }
