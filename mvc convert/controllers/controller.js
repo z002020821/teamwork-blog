@@ -75,11 +75,10 @@ async function Controller(srv) {
             cursor.each(function (err, doc) {
               if (doc) {
                 var userAcnt = doc.account
-                var userPwd = doc.password
 
                 if (recAcnt == userAcnt) {
-                  socket.emit('switchPage', {
-                    'page':'registFail'
+                  socket.emit('switchRegistPage', {
+                    'page':'fail'
                   })
                 } else {
                   var insertData = JSON.stringify({
@@ -87,8 +86,8 @@ async function Controller(srv) {
                     password: recPwd
                   })
                   model.regist('password', 'users', insertData)
-                  socket.emit('switchPage', {
-                    'page':'registSucess'
+                  socket.emit('switchRegistPage', {
+                    'page':'sucess'
                   })
                 }
               }
@@ -108,8 +107,8 @@ async function Controller(srv) {
                 var title = doc.title
 
                 if (recTitle == title) {
-                  socket.emit('switchPage', {
-                    'page':'postFail'
+                  socket.emit('switchPostPage', {
+                    'page':'fail'
                   })
                 } else {
                   var insertData = JSON.stringify({
@@ -118,8 +117,8 @@ async function Controller(srv) {
                     publisher: recPublisher
                   })
                   model.po('post', 'userpost', insertData)
-                  socket.emit('switchPage', {
-                    'page':'postCreate'
+                  socket.emit('switchPostPage', {
+                    'page':'sucess'
                   })
                 }
               }
