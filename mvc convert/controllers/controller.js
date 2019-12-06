@@ -52,7 +52,7 @@ async function Controller(srv) {
                         account: userAcnt, 
                         uuid: uuid
                       })
-                      model.userLogin('loginUsers', 'users', insertData)
+                      model.insertData('loginUsers', 'users', insertData)
                       socket.emit('switchLoginPage', {
                         'page':'userPage'
                       })
@@ -96,7 +96,7 @@ async function Controller(srv) {
                       account: recAcnt, 
                       password: recPwd
                     })
-                    model.regist('password', 'users', insertData)
+                    model.insertData('password', 'users', insertData)
                     socket.emit('switchRegistPage', {
                       'page':'sucess'
                     })
@@ -133,7 +133,7 @@ async function Controller(srv) {
                       content: recContent,
                       publisher: recPublisher
                     })
-                    model.po('post', 'userpost', insertData)
+                    model.insertData('post', 'userpost', insertData)
                     socket.emit('switchPostPage', {
                       'page':'sucess'
                     })
