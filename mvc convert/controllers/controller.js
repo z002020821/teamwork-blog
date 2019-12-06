@@ -35,7 +35,7 @@ async function Controller(srv) {
           var recPwd = data.pwd
           
           if (recAcnt == "" || recPwd == "") {
-            socket.emit('switchPage', {
+            socket.emit('switchLoginPage', {
               'page':'err'
             })
           } else {
@@ -53,11 +53,11 @@ async function Controller(srv) {
                         uuid: uuid
                       })
                       model.userLogin('loginUsers', 'users', insertData)
-                      socket.emit('switchPage', {
+                      socket.emit('switchLoginPage', {
                         'page':'userPage'
                       })
                     } else {
-                      socket.emit('switchPage', {
+                      socket.emit('switchLoginPage', {
                         'page':'err'
                       })
                     }
